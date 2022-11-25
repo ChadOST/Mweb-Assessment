@@ -11,7 +11,8 @@ public class Constants {
 	public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
 
 	/** The Constant REPORT_DIRECTORY. */
-	public final static String REPORT_DIRECTORY = WORKING_DIRECTORY + "/ExtentReports/AutomationResult.html";
+	public final static String dateTime = ""; //currentDate
+	public final static String REPORT_DIRECTORY = WORKING_DIRECTORY + "/ExtentReports/AutomationResult"+dateTime+".html";
 
 	/** The Constant PROJECT_NAME. */
 	public final static String PROJECT_NAME = "Mweb QA Assessment";

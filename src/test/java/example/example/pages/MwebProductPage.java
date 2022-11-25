@@ -6,24 +6,47 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * The Class represents FacebookLoginPage.
+ * The Class represents The Mweb Product Page.
  *
- * @author Bharathish
+ * @author CWilliams
  */
 public class MwebProductPage extends BasePage {
 
-	/** The check coverage button. */
-	@FindBy(className = "text-center laptop:text-left mb-1 text-lg laptop:text-2xl font-bold text-mwgray")
+	@FindBy(xpath = "(//h1)[1]")
 	private WebElement pageTitle;
+
+	@FindBy(id = "product_accordion")
+	private WebElement productAccordion;
 
 	@FindBy(xpath = "//div[@class= 'hidden laptop:grid laptop:grid-cols-3 laptop:gap-4' ]//div[@class = 'flex flex-1 flex-col border border-mwgray-xd mb-8']")
 	private WebElement routerOptions;
+
+	@FindBy(xpath = "//meta[@property = 'og:title']")
+	private WebElement metaTitle;
+
+	@FindBy(xpath = "//meta[@property = 'og:description']")
+	private WebElement metaDescription;
 
 	public MwebProductPage(WebDriver driver) {
 		super(driver);
 	}
 
-	public boolean validateAvaiableProviderNew(int expectedNumberofResults) 
+	public boolean validatePageTitle(String packageTitle)
+	{
+		productAccordion.isDisplayed();
+		WebElement pageHeader = driver.findElement(By.xpath("//h1[contains(text(),'"+packageTitle+"')][1]"));
+		pageHeader.isDisplayed();
+		pageTitle.isDisplayed();
+		if(pageTitle.getText().equals(packageTitle))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public boolean validateAvaiableProvider(int expectedNumberofResults) 
 	{
 		int xpathCount= driver.findElements(By.xpath("//div[@class= 'hidden laptop:grid laptop:grid-cols-3 laptop:gap-4' ]//div[@class = 'flex flex-1 flex-col border border-mwgray-xd mb-8']")).size();
 		if(xpathCount==expectedNumberofResults)
@@ -35,22 +58,21 @@ public class MwebProductPage extends BasePage {
 			return false;
 		}
 	}
-	public boolean validateAvaiableProvider(int expectedNumberofResults) {
-		int results = 0;
-		boolean isAvailable = true;
-		WebElement availableProvider = driver.findElement(By.xpath("//div[@class= 'hidden laptop:grid laptop:grid-cols-3 laptop:gap-4' ]//div[@id='"+results+"']"));
-		while (isAvailable)
+	public boolean validatePageTitleProperty(String title) 
+	{
+		if(metaTitle.getAttribute("content").equals(title))
 		{
-		if(availableProvider.isDisplayed())
-		{
-			results++;
+			return true;
 		}
 		else
 		{
-			isAvailable=false;
+			return false;
 		}
 	}
-		if(results==expectedNumberofResults)
+
+	public boolean validatePageDescriptionProperty(String description) 
+	{
+		if(metaDescription.getAttribute("content").equals(description))
 		{
 			return true;
 		}

@@ -5,23 +5,21 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.internal.thread.ThreadExecutionException;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
+import com.relevantcodes.extentreports.LogStatus;
+
+import example.example.util.ReportUtil;
 /**
- * The Class represents FacebookLoginPage.
+ * The Class represents The Mweb Home Page.
  *
- * @author Bharathish
+ * @author CWilliams
  */
 public class MwebHomePage extends BasePage {
 
-	/** The address input field. */
+	//Web Elements Needed to conduct tests
 	@FindBy(id = "coverage")
 	private WebElement coverageInput;
 
-	/** The check coverage button. */
 	@FindBy(className = "svg-inline--fa fa-magnifying-glass md:hidden h-5")
 	private WebElement checkCoverageButton;
 
@@ -38,7 +36,9 @@ public class MwebHomePage extends BasePage {
 		try 
 		{
 			coverageInput.sendKeys(address);
-		} catch (Exception e) {
+		} catch (Exception e) 
+		{
+			ReportUtil.addScreenShot(LogStatus.FAIL,"exception : " + e.getMessage());
 			return false;
 		}
 		return true;
@@ -54,11 +54,14 @@ public class MwebHomePage extends BasePage {
 			
 		} catch (Exception e) 
 		{
+			ReportUtil.addScreenShot(LogStatus.FAIL,"exception : " + e.getMessage());
 			return false;
 		}
 		return true;
 	}
 
+	//Using a Dynamic imput this method checks for an Xpath with the expected provider
+	//This method could also be adjusted to used to take in an array of Strings and validate against that
 	public Boolean validateAvaiableProvider(String expectedProvider) {
 		
 		WebElement availableProvider = driver.findElement(By.xpath("//img[@alt='"+expectedProvider+"']"));
@@ -72,13 +75,23 @@ public class MwebHomePage extends BasePage {
 			return false;
 		}
 	}
+
+	public String getPackageTitle()
+	{
+		firstOpenserveResultButton.isDisplayed();
+		WebElement titleText = driver.findElement(By.xpath("(//span[@href = '/fibre/openserve/uncapped-25mbps-download-10mbps-upload']//button)[2]"+"/../../..//h1"));
+		return titleText.getText();
+	}
+
 	public Boolean clickFirstOpenserveResult() {
 		try 
 		{
 			firstOpenserveResultButton.isDisplayed();
 			firstOpenserveResultButton.click();
+			
 		} catch (Exception e) 
 		{
+			ReportUtil.addScreenShot(LogStatus.FAIL,"exception : " + e.getMessage());
 			return false;
 		}
 		return true;
