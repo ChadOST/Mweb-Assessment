@@ -3,7 +3,7 @@
 The following is an automation assessment assigned by Mweb
 If you have any questions about any of the steps below please contact me at xad.ahri@gmail.com
 
-**Running the Tests**
+**Running the Tests**n\
 The project can be cloned and opened in any Java IDE (I used VS Code)
 Navigate To the "tests" folder (\Mweb-Assessment\src\test\java\example\example\tests)
 From here you can simply run the methods labelled with @Test
