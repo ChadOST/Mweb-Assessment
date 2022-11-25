@@ -1,4 +1,4 @@
-# Mweb-Assessment\
+# Mweb-Assessment
 
 The following is an automation assessment assigned by Mweb\
 If you have any questions about any of the steps below please contact me at xad.ahri@gmail.com
