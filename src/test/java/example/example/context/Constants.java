@@ -1,5 +1,8 @@
 package example.example.context;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The Class is for Constants.
  *
@@ -11,7 +14,9 @@ public class Constants {
 	public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
 
 	/** The Constant REPORT_DIRECTORY. */
-	public final static String dateTime = ""; //currentDate
+	public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");  
+    public static LocalDateTime now = LocalDateTime.now();   
+	public final static String dateTime =dtf.format(now);
 	public final static String REPORT_DIRECTORY = WORKING_DIRECTORY + "/ExtentReports/AutomationResult"+dateTime+".html";
 
 	/** The Constant PROJECT_NAME. */
